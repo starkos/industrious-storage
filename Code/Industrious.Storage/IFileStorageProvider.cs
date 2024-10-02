@@ -1,6 +1,6 @@
 ﻿namespace Industrious.Storage;
 
-public class Class1
+public interface IFileStorageProvider
 {
 
 }
