@@ -1,9 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net8.0-macos</TargetFramework>
+    <TargetFrameworks>net8.0;net8.0-macos</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+		<EnableDefaultCompileItems>false</EnableDefaultCompileItems>
   </PropertyGroup>
+	
+	<ItemGroup>
+		<Compile Include="*.cs" Exclude="*.shared.cs;*.macos.cs" />
+	</ItemGroup>
+	
+	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' == 'macos' ">
+		<Compile Include="IcloudStorageProvider.macos.cs" />
+		<None Include="IcloudStorageProvider.shared.cs" />
+	</ItemGroup>
+	
+	<ItemGroup Condition=" '$(TargetPlatformIdentifier)' != 'macos' ">
+		<Compile Include="IcloudStorageProvider.shared.cs" />
+		<None Include="IcloudStorageProvider.macos.cs" />
+	</ItemGroup>
 
 </Project>

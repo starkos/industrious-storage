@@ -1,16 +1,13 @@
 namespace Industrious.Storage;
 
-public class FileStorage
+public static class FileStorage
 {
 	public static IFileStorageProvider Connect(FileStorageProvider provider)
 	{
-		switch (provider)
+		return provider switch
 		{
-		case FileStorageProvider.Icloud:
-			return IcloudStorageProvider.Connect();
-
-		default:
-			throw new ArgumentOutOfRangeException(nameof(provider), provider, null);
-		}
+			FileStorageProvider.Icloud => IcloudStorageProvider.Connect(),
+			_ => throw new ArgumentOutOfRangeException(nameof(provider), provider, null)
+		};
 	}
 }
